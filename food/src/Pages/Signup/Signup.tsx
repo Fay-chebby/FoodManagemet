@@ -65,6 +65,7 @@ function Signup(){
                 value={FirstName}
                 onChange={(e)=>SetFirstName(e.target.value)}
                 name="FirstName"
+                required
 
                 />
             </div>
@@ -76,6 +77,7 @@ function Signup(){
                 value={LastName}
                 onChange={(e)=>SetLastName(e.target.value)}
                 name="LastName"
+                required
                 />
             </div>
             <div>
@@ -85,7 +87,8 @@ function Signup(){
                 type="email"
                 value={Email}
                 onChange={(e)=>SetEmail(e.target.value)}
-                name="Email"/>
+                name="Email"
+                required/>
 
             </div>
             <div>
@@ -95,7 +98,8 @@ function Signup(){
                 type="password"
                 value={Password}
                 onChange={handlePasswordChange}
-                name="Password"/>
+                name="Password"
+                required/>
             </div>
             <div>
             <label htmlFor="Confirmation">Confirm Password</label>
@@ -104,7 +108,8 @@ function Signup(){
                 type="password"
                 value={confirmPassword}
                 onChange={(e)=>SetConfirmPassword(e.target.value)}
-                name="Confirmation"/>
+                name="Confirmation"
+                required/>
             </div>
             {/* Show hints dynamically only when typing */}
             {Password.length > 0 && hints.length > 0 && (
