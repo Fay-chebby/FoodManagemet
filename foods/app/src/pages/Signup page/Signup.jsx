@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 function Signup() {
     const [firstName, setFirstName] = useState("");
@@ -10,6 +11,7 @@ function Signup() {
     const [error, setError] = useState("");
     const [hints, setHints] = useState([]);
 
+    // ✅ Password Validation Function
     const validatePassword = (password) => {
         const errors = [];
 
@@ -29,35 +31,52 @@ function Signup() {
         return errors;
     };
 
+    // ✅ Handle Password Change & Validate in Real Time
     const handlePasswordChange = (e) => {
         const newPassword = e.target.value;
         setPassword(newPassword);
-        setHints(validatePassword(newPassword)); // Show hints dynamically
+        setHints(validatePassword(newPassword)); // Show validation hints
     };
 
+    // ✅ Handle Confirm Password Change & Instant Matching
+    const handleConfirmPasswordChange = (e) => {
+        const newConfirmPassword = e.target.value;
+        setConfirmPassword(newConfirmPassword);
+
+        // Trim both passwords to prevent accidental space mismatches
+        if (password.trim() !== newConfirmPassword.trim()) {
+            setError("Passwords do not match.");
+        } else {
+            setError(""); // Clear error if they match
+        }
+    };
+
+    // ✅ Handle Signup Form Submission
     const handleSubmit = (e) => {
         e.preventDefault();
         setError(""); // Reset error message
 
+        // Final validation before submission
         if (validatePassword(password).length > 0) {
             setError("Password must meet all complexity requirements.");
             return;
         }
 
-        if (password !== confirmPassword) {
+        if (password.trim() !== confirmPassword.trim()) {
             setError("Passwords do not match.");
             return;
         }
 
         console.log("Signup Successful", { firstName, lastName, email, password });
+        alert("Signup Successful! 🎉");
         // Call API or further processing here
     };
 
     return (
-        <div>
+        <div className="signup-container">
             <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form onSubmit={handleSubmit} className="signup-form">
+                <div className="input-group">
                     <label htmlFor="firstName">First Name</label>
                     <input
                         id="firstName"
@@ -68,7 +87,7 @@ function Signup() {
                         required
                     />
                 </div>
-                <div>
+                <div className="input-group">
                     <label htmlFor="lastName">Last Name</label>
                     <input
                         id="lastName"
@@ -79,7 +98,7 @@ function Signup() {
                         required
                     />
                 </div>
-                <div>
+                <div className="input-group">
                     <label htmlFor="email">Email</label>
                     <input
                         id="email"
@@ -90,7 +109,7 @@ function Signup() {
                         required
                     />
                 </div>
-                <div>
+                <div className="input-group">
                     <label htmlFor="password">Password</label>
                     <input
                         id="password"
@@ -101,36 +120,40 @@ function Signup() {
                         required
                     />
                 </div>
-                <div>
+                <div className="input-group">
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input
                         id="confirmPassword"
                         type="password"
                         value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        onChange={handleConfirmPasswordChange}
                         name="confirmPassword"
                         required
                     />
                 </div>
+
                 {/* Show password hints dynamically */}
                 {password.length > 0 && hints.length > 0 && (
-                    <div style={{color: "red", fontSize: "0.9em", marginTop: "5px"}}>
+                    <div className="password-hints">
                         {hints.map((hint, index) => (
                             <p key={index}>{hint}</p>
                         ))}
                     </div>
                 )}
-                {error && <p style={{color: "red"}}>{error}</p>}
-                <div>
-                    <h2>Already have account?</h2>
-                    <button>
-                        <Link to="/login" style={{textDecoration: "none", color: "inherit"}}>
-                            login
-                        </Link>
-                    </button>
-                </div>
-                <button type="submit">Sign Up</button>
+
+                {/* Show Password Matching Error */}
+                {error && <p className="error-message">{error}</p>}
+
+                <button type="submit" className="signup-btn">Sign Up</button>
             </form>
+
+            {/* Already Have an Account */}
+            <div className="login-link">
+                <h2>Already have an account?</h2>
+                <button className="login-btn">
+                    <Link to="/login">Login</Link>
+                </button>
+            </div>
         </div>
     );
 }
