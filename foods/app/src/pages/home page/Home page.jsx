@@ -8,7 +8,7 @@ export default function HomePage() {
             <p>Welcome to the home page!</p>
             <button>
                 <Link to="/signup" style={{ textDecoration: "none", color: "inherit" }}>
-                    Login
+                    Get Started
                 </Link>
             </button>
         </div>

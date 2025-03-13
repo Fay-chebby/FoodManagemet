@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 
+
 function Signup() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -11,7 +12,7 @@ function Signup() {
     const [error, setError] = useState("");
     const [hints, setHints] = useState([]);
 
-    // ✅ Password Validation Function
+    //  Password Validation Function
     const validatePassword = (password) => {
         const errors = [];
 
@@ -31,14 +32,14 @@ function Signup() {
         return errors;
     };
 
-    // ✅ Handle Password Change & Validate in Real Time
+
     const handlePasswordChange = (e) => {
         const newPassword = e.target.value;
         setPassword(newPassword);
         setHints(validatePassword(newPassword)); // Show validation hints
     };
 
-    // ✅ Handle Confirm Password Change & Instant Matching
+
     const handleConfirmPasswordChange = (e) => {
         const newConfirmPassword = e.target.value;
         setConfirmPassword(newConfirmPassword);
@@ -51,7 +52,7 @@ function Signup() {
         }
     };
 
-    // ✅ Handle Signup Form Submission
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setError(""); // Reset error message
@@ -68,12 +69,22 @@ function Signup() {
         }
 
         console.log("Signup Successful", { firstName, lastName, email, password });
-        alert("Signup Successful! 🎉");
+        alert("Signup Successful! ");
         // Call API or further processing here
     };
 
     return (
         <div className="signup-container">
+            <div className="flex justify-center items-center h-screen bg-gray-100">
+                <div
+                    className="w-80 h-96 overflow-hidden rounded-2xl shadow-lg flex justify-center items-center bg-white">
+                    <img
+                        src="/Premium Vector _ Task to do list illustration.jpeg" // Update with the correct path
+                        alt="Signup"
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+            </div>
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit} className="signup-form">
                 <div className="input-group">
