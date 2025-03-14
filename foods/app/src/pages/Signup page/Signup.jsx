@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../../Styles/SignUp.css";
 
 
 
@@ -75,13 +76,13 @@ function Signup() {
 
     return (
         <div className="signup-container">
-            <div className="flex justify-center items-center h-screen bg-gray-100">
+            <div className=" ">
                 <div
-                    className="w-80 h-96 overflow-hidden rounded-2xl shadow-lg flex justify-center items-center bg-white">
+                    className="  ">
                     <img
-                        src="/Premium Vector _ Task to do list illustration.jpeg" // Update with the correct path
+                        src="/Premium Vector _ Task to do list illustration.jpeg"
                         alt="Signup"
-                        className="w-full h-full object-cover"
+                        className=""
                     />
                 </div>
             </div>
